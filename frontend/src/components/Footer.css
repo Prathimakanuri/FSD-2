@@ -1,0 +1,120 @@
+.footer {
+  background: var(--color-bg-secondary);
+  border-top: 1px solid var(--color-border);
+  margin-top: auto;
+}
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-10);
+  padding: var(--space-12) var(--space-6);
+}
+
+.footer__brand {
+  flex: 1;
+  min-width: 240px;
+  max-width: 360px;
+}
+
+.footer__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  color: var(--color-violet-light);
+  margin-bottom: var(--space-3);
+}
+
+.footer__tagline {
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-3);
+}
+
+.footer__disclaimer {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-2);
+}
+
+.footer__disclaimer a {
+  color: var(--color-violet-light);
+}
+
+.footer__payment-notice {
+  font-size: var(--text-xs);
+  color: var(--color-warning);
+  background: var(--color-warning-subtle);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--color-warning);
+  margin-top: var(--space-3);
+}
+
+.footer__links {
+  display: flex;
+  gap: var(--space-12);
+}
+
+.footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.footer__col-title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-1);
+}
+
+.footer__link {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.footer__link:hover {
+  color: var(--color-violet-light);
+}
+
+.footer__bottom {
+  border-top: 1px solid var(--color-divider);
+  padding: var(--space-4) var(--space-6);
+}
+
+.footer__bottom-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.footer__copyright {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-main {
+  flex: 1;
+}
+
+@media (max-width: 640px) {
+  .footer__inner { flex-direction: column; gap: var(--space-8); }
+  .footer__links { gap: var(--space-8); }
+  .footer__brand { max-width: 100%; }
+}
