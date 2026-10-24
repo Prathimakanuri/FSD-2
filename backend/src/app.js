@@ -6,6 +6,8 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
+const path = require('path');
+const fs = require('fs');
 
 const { validateEnv, env } = require('./config/env');
 const { errorHandler, notFound } = require('./middleware/errorHandler');
@@ -77,6 +79,30 @@ app.use('/api/movies', movieRoutes);
 app.use('/api', venueRoutes);
 app.use('/api', bookingRoutes);
 app.use('/api/admin', adminRoutes);
+
+// ─── Serve React frontend in production ───────────────────────────────────────
+// The frontend is built to frontend/dist (relative to the repo root,
+// which is one level above the backend folder).
+const FRONTEND_DIST = path.join(__dirname, '..', '..', 'frontend', 'dist');
+
+if (env.NODE_ENV === 'production' && fs.existsSync(FRONTEND_DIST)) {
+  // Serve static assets (JS, CSS, images)
+  app.use(express.static(FRONTEND_DIST));
+
+  // For any non-API route, send index.html so React Router works
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(FRONTEND_DIST, 'index.html'));
+  });
+} else if (env.NODE_ENV === 'production') {
+  // Build not found — helpful message
+  app.get('/', (req, res) => {
+    res.json({
+      success: true,
+      message: 'CineBook API is running. Frontend build not found — run the build step.',
+      api: '/api/health',
+    });
+  });
+}
 
 // ─── Error handling ───────────────────────────────────────────────────────────
 app.use(notFound);
