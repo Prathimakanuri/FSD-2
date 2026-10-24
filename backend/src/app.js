@@ -86,11 +86,12 @@ app.use('/api/admin', adminRoutes);
 const FRONTEND_DIST = path.join(__dirname, '..', '..', 'frontend', 'dist');
 
 if (env.NODE_ENV === 'production' && fs.existsSync(FRONTEND_DIST)) {
-  // Serve static assets (JS, CSS, images)
+  // Serve static assets (JS, CSS, images, fonts)
   app.use(express.static(FRONTEND_DIST));
 
-  // For any non-API route, send index.html so React Router works
-  app.get('*', (req, res) => {
+  // For any non-API route, serve index.html so React Router handles navigation.
+  // Express 5 requires /{*splat} instead of the old * wildcard.
+  app.get('/{*splat}', (req, res) => {
     res.sendFile(path.join(FRONTEND_DIST, 'index.html'));
   });
 } else if (env.NODE_ENV === 'production') {
