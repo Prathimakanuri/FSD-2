@@ -23,9 +23,23 @@ validateEnv();
 const app = express();
 
 // Security headers
+// Allow TMDB images and inline scripts/styles needed by the Vite React build
 app.use(helmet({
   crossOriginEmbedderPolicy: false,
   crossOriginResourcePolicy: { policy: 'cross-origin' },
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc:  ["'self'"],
+      scriptSrc:   ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+      styleSrc:    ["'self'", "'unsafe-inline'"],
+      imgSrc:      ["'self'", "data:", "blob:", "https://image.tmdb.org", "https://*.tmdb.org"],
+      connectSrc:  ["'self'"],
+      fontSrc:     ["'self'", "data:"],
+      objectSrc:   ["'none'"],
+      mediaSrc:    ["'self'"],
+      frameSrc:    ["'self'", "https://www.youtube.com"],
+    },
+  },
 }));
 
 // CORS

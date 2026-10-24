@@ -4,10 +4,12 @@
   "description": "CineBook MERN Movie Ticket Booking System",
   "scripts": {
     "build": "npm install --prefix backend && npm install --include=dev --prefix frontend && npm run build --prefix frontend",
-    "start": "node backend/server.js",
+    "start": "node backend/scripts/refresh-showtimes.js && node backend/server.js",
     "dev:backend": "npm run dev --prefix backend",
     "dev:frontend": "npm run dev --prefix frontend",
-    "seed": "node backend/scripts/seed.js"
+    "seed": "node backend/scripts/seed.js",
+    "seed:reset": "node backend/scripts/seed.js --reset",
+    "refresh": "node backend/scripts/refresh-showtimes.js"
   },
   "engines": {
     "node": ">=18.0.0"
